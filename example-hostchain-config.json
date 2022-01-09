@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "hostChainName": "fcos-worker",
+  "resources": [
+    {
+      "resourceType": "ipxe",
+      "resourceName": "ipxe",
+      "configAddress": "file://worker-ipxe.cfg",
+      "arch": "amd64",
+      "links": [
+        {
+          "kernel": {
+            "param": "kernel",
+            "config": {
+              "kernel": "{{ .resources.kernel }}"
+            }
+          }
+        },
+        {
+          "initrd": {
+            "param": "initrd",
+            "config": {
+              "initrd": "main",
+              "coreos.live.rootfs_url": "{{ .resources.rootfs }}"
+            }
+          }
+        },
+        {
+          "ignition": {
+            "param": "ignition.firstboot",
+            "config": {
+              "ignition.platform.id": "metal",
+              "ignition.config.url": "{{ .resources.ignition }}",
+              "systemd.unified_cgroup_hierarchy": 0
+            }
+          }
+        },
+        {
+          "ramdisk": {
+            "param": "initrd",
+            "flags": [
+              {
+                "name": {
+                  "main": {
+                    "coreos.live.rootfs_url": "{{ .resources.ramdisk }}"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]        
+    },
+    {
+      "resourceType": "disk",
+      "resourceName": "kernel",
+      "configAddress": "file://fedora-coreos-33.20210328.3.0-live-kernel-x86_64",
+      "arch": "amd64"
+    },
+    {
+      "resourceType": "disk",
+      "resourceName": "rootfs",
+      "configAddress": "file://fedora-coreos-33.20210328.3.0-live-rootfs.x86_64.img",
+      "arch": "amd64"
+    },
+    {
+      "resourceType": "disk",
+      "resourceName": "ramdisk",
+      "configAddress": "file://fedora-coreos-33.20210328.3.0-live-kernel-x86_64",
+      "arch": "amd64"
+    },
+    {
+      "resourceType": "ignition",
+      "resourceName": "ignition",
+      "configAddress": "file://fcos-worker.ign"
+    }
+  ]
+}

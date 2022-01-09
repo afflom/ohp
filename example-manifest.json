@@ -1,0 +1,57 @@
+{
+    "schemaVersion": 2,
+    "config": {
+      "mediaType": "application/vnd.oci.image.config.v1+json",
+      "digest": "sha256:44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "size": 2,
+      "annotations": {
+        "hostchain": "fcos-worker",
+        "arch": "amd64"
+      }
+    },
+    "layers": [
+      {
+        "mediaType": "application/vnd.oci.image.layer.v1.tar",
+        "digest": "sha256:22af0898315a239117308d39acd80636326c4987510b0ec6848e58eb584ba82e",
+        "size": 6,
+        "annotations": {
+          "org.opencontainers.image.title": "fcos-worker.ipxe"
+        }
+      },
+      {
+        "mediaType": "application/vnd.oci.image.layer.v1.tar",
+        "digest": "sha256:be6fe11876282442bead98e8b24aca07f8972a763cd366c56b4b5f7bcdd0f61c",
+        "size": 7,
+        "annotations": {
+          "org.opencontainers.image.title": "fedora-coreos-33.20210328.3.0-live-kernel-x86_64"
+        }
+      },
+      {
+        "mediaType": "application/vnd.oci.image.layer.v1.tar",
+        "digest": "sha256:ae6fe11876282442bead98e8b24aca07f8972a763cd366c56b4b5f7bcdd23eac",
+        "size": 7,
+        "annotations": {
+          "org.opencontainers.image.title": "fedora-coreos-33.20210328.3.0-live-rootfs.x86_64.img"
+        }
+      },
+      {
+        "mediaType": "application/vnd.oci.image.layer.v1.tar",
+        "digest": "sha256:ce6fe11876282442bead98e8b24aca07f8972a763cd366c56b4b5f7bcdd23eac",
+        "size": 7,
+        "annotations": {
+          "org.opencontainers.image.title": "fedora-coreos-33.20210328.3.0-live-initramfs.x86_64.img"
+        }
+      },
+      {
+        "mediaType": "application/vnd.oci.image.layer.v1.tar",
+        "digest": "sha256:fe5fa11776282442bead98e8b24aca07f8972a763cd366c56b4b5f7bcdd23eaf",
+        "size": 7,
+        "annotations": {
+          "org.opencontainers.image.title": "fcos-worker.ign"
+        }
+      }
+    ],
+    "annotations": {
+      "arch": "amd64"
+    }
+  }
