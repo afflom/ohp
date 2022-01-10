@@ -20,7 +20,7 @@ A host chain might contain the following resources:
 
 A hostchain-config is an array of boot resource objects that contain key/value pairs that correspond to variable substitutions within the referenced boot resources. OHP provides an extensible framework for adding resource types that OHP uses to process the hostchain-config
 
-[Here is an example of a basic hostchain-config for Fedora CoreOS](./example-hostchain-config.json)
+[Here is an example of a basic hostchain-config for Fedora CoreOS](./example-hostchain-config.json) that implements [this example](https://docs.fedoraproject.org/en-US/fedora-coreos/live-booting-ipxe/#_setting_up_the_boot_script) from the Fedora CoreOS docs. 
 
 OHP will perform the following actions when processing the above hostchain-config:
 

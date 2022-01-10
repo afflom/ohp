@@ -41,9 +41,7 @@
             "flags": [
               {
                 "name": {
-                  "main": {
-                    "coreos.live.rootfs_url": "{{ .resources.ramdisk }}"
-                  }
+                  "main": "{{ .resources.ramdisk }}"
                 }
               }
             ]
