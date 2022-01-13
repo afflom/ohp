@@ -3,15 +3,15 @@
 OHP is in the planning/design phase of development. This repo is intended to contain the specification of OHP and a client that implements a reference design of OHP. Any feedback on the below content and/or OHP concepts would be very appreciated. 
 
 ## Overview
-OCI host provisioning (OHP) is a host provisioning framework based on OCI registry as storage ([ORAS](https://oras.land)) technology. OHP bundles and configures artifacts used for network booting into an OCI artifact that can be pushed into an OCI registry. Several host provisioning workflows can then be used to provision hosts from the OCI artifact such as; A network boot client chainloading the network boot artifacts from the OCI registry as HTTP requests (without registry client) or a virtual machine (VM) manager (such as kubevirt) consuming the entire OCI artifact and applying it to a VM config.  
+OCI host provisioning (OHP) is a host provisioning framework based on OCI artifact and OCI registry as storage ([ORAS](https://oras.land)) technology. OHP bundles and configures artifacts used for network booting into an OCI artifact that can be pushed into an OCI registry. Several host provisioning workflows can then be used to provision hosts from the OCI artifact such as; A network boot client chainloading the network boot artifacts from the OCI registry as HTTP requests (without registry client) or a virtual machine (VM) manager (such as kubevirt) consuming the entire OCI artifact and applying it to a VM config.  
 
 
 ## Host Chains
-A configuration called a hostchain-config and an OCI registry tag are used to link the network booting resources together to create a provisioning chain. OCI manifests are used as the OHP host chain definitions. 
+A configuration called a hostchain-config and an OCI registry tag are used to link the network booting resources together to create a provisioning chain. OCI manifests are used as the OHP hostchain definitions. 
 
-When a host chain is rendered from a hostchain-config and an OCI registry tag, OHP performs a series of substitutions while constructing a [deep graph of OCI artifacts](https://oras.land/cli/6_reference_types/#:~:text=example%0A%20%20%20%20%E2%94%94%E2%94%80%E2%94%80%20sha256%3A1b6308bc4a2dd8933e9f66ff5bbc47e685516e5378208b46c58dc...-,creating%20deep%20graphs%20of%20artifacts,-The%20ORAS%20Artifacts). Artifacts are hashed in reverse order of their chainloading dependencies. The hash of each artifact is combined with the OCI registry tag to create the artifact URI. Each rendered artifact URI is substituted into the configuration of the preceding boot resource until all substitutions have been performed and all artifacts have been hashed. When the first boot resource in the provisioning chain is hashed, the OCI manifest is finalized and the URI of the first boot resource in the provisioning chain is output for user reference. That URI can then be referenced via DHCP options or the URI with in-line basic auth can also be directly injected into a UEFI host via Redfish. There are many ways to configure pre-boot environments to reference a OHP host chain or the entire OCI artifact. 
+When a hostchain is rendered from a hostchain-config and an OCI registry tag, OHP performs a series of substitutions while constructing a [deep graph of OCI artifacts](https://oras.land/cli/6_reference_types/#:~:text=example%0A%20%20%20%20%E2%94%94%E2%94%80%E2%94%80%20sha256%3A1b6308bc4a2dd8933e9f66ff5bbc47e685516e5378208b46c58dc...-,creating%20deep%20graphs%20of%20artifacts,-The%20ORAS%20Artifacts). Artifacts are hashed in reverse order of their chainloading dependencies. The hash of each artifact is combined with the OCI registry tag to create the artifact URI. Each rendered artifact URI is substituted into the configuration of the preceding boot resource until all substitutions have been performed and all artifacts have been hashed. When the first boot resource in the provisioning chain is hashed, the OCI manifest is finalized and the URI of the first boot resource in the provisioning chain is output for user reference. That URI can then be referenced by the target host for provisioning. There are many ways to configure pre-boot environments to reference an OHP hostchain or the entire OCI artifact. 
 
-A host chain might contain the following resources:
+A hostchain might contain the following resources:
 
 1. preboot env
 2. os image(s)
@@ -41,7 +41,7 @@ Once the OHP hostchain has been rendered in OCI format, it can be pushed into an
 
 
 ## Multi-arch
-Multi-arch boot media is supported by utilizing oci manifest lists. 
+Multi-arch boot media is supported by utilizing oci image indices. 
 
 ## Custom Resource Types
 
