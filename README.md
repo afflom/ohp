@@ -48,3 +48,8 @@ Multi-arch boot media is supported by utilizing oci image indices.
 Support for custom resource types can be added to OHP by adding the logic to parse a hostchain-config to a program and adding it to the execution environment's $PATH with the hostconfig prefix. For example, to add a custom pxelinux resource type, author a script or program to process a hostchain-config resource object and add that program or script to the execution environment's $PATH as `hostchain-pxelinux`. When OHP encounters a `pxelinux` resource type within the hostchain config, it will call `hostchain-pxelinux` from the $PATH.
 
 
+## Further Reading
+
+1. https://github.com/opencontainers/artifacts/blob/main/artifact-authors.md
+2. https://oras.land/
+3. https://github.com/oras-project/artifacts-spec
